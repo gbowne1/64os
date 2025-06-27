@@ -108,12 +108,10 @@ enable_paging:
 
 error:
     ; print "ERR: X" where X is the error code
-	mov dword [0xb8000], 0x4f524f45
-	mov dword [0xb8000], 0x4f3a4f52
-	mov dword [0xb8000], 0x4f204f20
-	mov byte  [0xb800a], al
-	hlt
-
+    mov dword [0xb8000], 0x4f524f45  ; "ERR"
+    mov dword [0xb8004], 0x3a4f52    ; ": X" (X will be written next)
+    mov byte  [0xb8008], al           ; Write the error code
+    hlt
 
 section .bss
 align 4096
